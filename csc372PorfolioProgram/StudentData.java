@@ -64,7 +64,7 @@ public class StudentData {
     }
 
     //Private static class Student contained within class StudentData to restrict access to Student class
-    private static class Student implements Comparator<Student> {
+    private static class Student{
         private String name;
         private String address;
         private double gpa;
@@ -80,26 +80,6 @@ public class StudentData {
     	public String getName() {
     		return name;
     	}
-    	
-    	public void setName(String name) {
-    		this.name = name;
-    	}
-    	
-    	public String getAddress() {
-    		return address;
-    	}
-    	
-    	public void setAddress(String address) {
-    		this.address = address;
-    	}
-    	
-    	public double getGPA() {
-    		return gpa;
-    	}
-    	
-    	public void setGPA(double gpa) {
-    		this.gpa = gpa;
-    	}
         
         //Override toString method to print Student data 
         @Override
@@ -107,10 +87,6 @@ public class StudentData {
             return "Name: " + name + ", Address: " + address + ", GPA: " + gpa;
         }
 
-		@Override
-		public int compare(Student student1, Student student2) {
-			return student1.getName().compareToIgnoreCase(student2.getName());
-		}
     }
 }
 
