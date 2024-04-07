@@ -4,7 +4,6 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -49,18 +48,31 @@ public class StudentData {
         
         //Close scanner
         scanner.close();
-        //Print unsorted LinkedList
-        for(Student student : students) {
-        	System.out.println(student.toString());
-        }
         //Use Collections sort method to sort list of students
         //Comparator interface is implemented using lambda expression to simplify code and increase readability
         Collections.sort(students, (student1, student2) -> student1.getName().compareToIgnoreCase(student2.getName()));
         
-        //Print Sorted LinkedList
-        for(Student student : students) {
-        	System.out.println(student.toString());
+        //Write student data to text file
+        try {
+            writeStudentsToFile(students);
+        } catch (IOException e) {
+            System.err.println("An error occurred while writing to the file: " + e.getMessage());
         }
+    }
+
+    //Custom method for writing LinkedList to a .txt file
+    private static void writeStudentsToFile(LinkedList<Student> students) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter("students.txt"));
+        
+        //Loop through students in LinkedList and write to file
+        for (Student student : students) {
+            writer.write(student.toString());
+            writer.newLine();
+        }
+
+        writer.close();
+        System.out.println("Student data has been written to students.txt");
+    
     }
 
     //Private static class Student contained within class StudentData to restrict access to Student class
